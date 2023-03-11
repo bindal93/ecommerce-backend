@@ -1,12 +1,28 @@
+const fs = require("fs");
 const express = require("express");
 const router = express.Router();
-const elastic = require("elasticsearch");
 const bodyParser = require("body-parser").json();
-const elasticClient = elastic.Client({
-  host: "localhost:9200"
+const { Client } = require("@elastic/elasticsearch");
+const elasticClient = new Client({
+  node: "https://34.118.243.85:9200",
+  auth: {
+    username: "elastic",
+    password: "igKrG-vDr1mTJzKF_7Vm"
+  },
+  tls: {
+    ca: fs.readFileSync("./http_ca.crt"),
+    rejectUnauthorized: false
+  },
+  headers: {
+    "Content-Type": "application/json",
+    "access-control-allow-origin": "*",
+    accept: "*/*",
+    Authorization: "Basic ZWxhc3RpYzppZ0tyRy12RHIxbVRKektGXzdWbQ=="
+  }
 });
 
 router.use((req, res, next) => {
+  console.log("25 #################", res);
   elasticClient
     .index({
       index: "logs",
@@ -25,6 +41,7 @@ router.use((req, res, next) => {
 });
 
 router.post("/products", bodyParser, (req, res) => {
+  console.log("44 #################", req, res, next);
   elasticClient
     .index({
       index: "products",
@@ -44,6 +61,7 @@ router.post("/products", bodyParser, (req, res) => {
 });
 
 router.get("/products/:id", (req, res) => {
+  console.log("64 #################", req, res, next);
   let query = {
     index: "products",
     id: req.params.id
@@ -69,6 +87,7 @@ router.get("/products/:id", (req, res) => {
 });
 
 router.put("/products/:id", bodyParser, (req, res) => {
+  console.log("90 #################", req, res, next);
   elasticClient
     .update({
       index: "products",
@@ -92,6 +111,7 @@ router.put("/products/:id", bodyParser, (req, res) => {
 });
 
 router.delete("/products/:id", (req, res) => {
+  console.log("114 #################", req, res, next);
   elasticClient
     .delete({
       index: "products",
@@ -110,8 +130,10 @@ router.delete("/products/:id", (req, res) => {
 });
 
 router.get("/products", (req, res) => {
+  console.log("133 #################", req, res, next);
   let query = {
-    index: "products"
+    index: "products",
+    size: 200
   };
   if (req.query.product) query.q = `*${req.query.product}*`;
   elasticClient
