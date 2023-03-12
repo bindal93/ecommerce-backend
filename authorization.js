@@ -1,14 +1,14 @@
-const firebase = require("./firebase");
+const firebase = require("./firebase/firebase-admin");
 
-function authMiddleware(request, response, next) {
-console.log(request, response, next)
+function authorization(request, response, next) {
+  console.log(request, response, next);
   const headerToken = request.headers.authorization;
   if (!headerToken) {
-    return response.send({ message: "No token provided" }).status(401);
+    return response.status(401).send({ message: "No token provided" });
   }
 
   if (headerToken && headerToken.split(" ")[0] !== "Bearer") {
-    response.send({ message: "Invalid token" }).status(401);
+    response.status(401).send({ message: "Invalid token" });
   }
 
   const token = headerToken.split(" ")[1];
@@ -19,4 +19,4 @@ console.log(request, response, next)
     .catch(() => response.send({ message: "Could not authorize" }).status(403));
 }
 
-module.exports = authMiddleware;
+module.exports = authorization;

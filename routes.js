@@ -20,7 +20,7 @@ const elasticClient = new Client({
 });
 
 router.use((req, res, next) => {
-  console.log("25 #################", res);
+  console.log("25 #################");
   elasticClient
     .index({
       index: "logs",
@@ -33,13 +33,14 @@ router.use((req, res, next) => {
       console.log("Logs indexed");
     })
     .catch((err) => {
+      console.log("error occured");
       console.log(err);
     });
   next();
 });
 
 router.post("/products", bodyParser, (req, res) => {
-  console.log("44 #################", req, res);
+  console.log("44 #################");
   elasticClient
     .index({
       index: "products",
@@ -59,7 +60,7 @@ router.post("/products", bodyParser, (req, res) => {
 });
 
 router.get("/products/:id", (req, res) => {
-  console.log("64 #################", req, res);
+  console.log("64 #################");
   let query = {
     index: "products",
     id: req.params.id
@@ -85,7 +86,7 @@ router.get("/products/:id", (req, res) => {
 });
 
 router.put("/products/:id", bodyParser, (req, res) => {
-  console.log("90 #################", req, res);
+  console.log("90 #################");
   elasticClient
     .update({
       index: "products",
@@ -109,7 +110,7 @@ router.put("/products/:id", bodyParser, (req, res) => {
 });
 
 router.delete("/products/:id", (req, res) => {
-  console.log("114 #################", req, res);
+  console.log("114 #################");
   elasticClient
     .delete({
       index: "products",
@@ -128,7 +129,7 @@ router.delete("/products/:id", (req, res) => {
 });
 
 router.get("/products", (req, res) => {
-  console.log("133 #################", req, res);
+  console.log("133 #################");
   let query = {
     index: "products",
     size: 200
@@ -150,4 +151,26 @@ router.get("/products", (req, res) => {
     });
 });
 
+// function router(req, res, next){
+//   console.log("133 #################");
+//   let query = {
+//     index: "products",
+//     size: 200
+//   };
+//   if (req.query.product) query.q = `*${req.query.product}*`;
+//   elasticClient
+//     .search(query)
+//     .then((resp) => {
+//       return res.status(200).json({
+//         products: resp.hits.hits
+//       });
+//     })
+//     .catch((err) => {
+//      // console.log(err);
+//       return res.status(500).json({
+//         msg: "Error",
+//         err
+//       });
+//     });
+// }
 module.exports = router;
