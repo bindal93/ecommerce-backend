@@ -150,27 +150,4 @@ router.get("/products", (req, res) => {
       });
     });
 });
-
-// function router(req, res, next){
-//   console.log("133 #################");
-//   let query = {
-//     index: "products",
-//     size: 200
-//   };
-//   if (req.query.product) query.q = `*${req.query.product}*`;
-//   elasticClient
-//     .search(query)
-//     .then((resp) => {
-//       return res.status(200).json({
-//         products: resp.hits.hits
-//       });
-//     })
-//     .catch((err) => {
-//      // console.log(err);
-//       return res.status(500).json({
-//         msg: "Error",
-//         err
-//       });
-//     });
-// }
 module.exports = router;
