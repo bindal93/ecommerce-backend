@@ -129,7 +129,7 @@ router.delete("/products/:id", (req, res) => {
 });
 
 router.get("/products", (req, res) => {
-  console.log("133 #################");
+  console.log("133 #################", req.query);
   let query = {
     index: "products",
     size: 200
