@@ -1,4 +1,4 @@
-const elasticURL = "https://34.125.208.236:9200";
+const elasticURL = "https://34.125.228.46:9200";
 const authorizationBasic = "Basic ZWxhc3RpYzppZ0tyRy12RHIxbVRKektGXzdWbQ==";
 const authObj = {
   username: "elastic",

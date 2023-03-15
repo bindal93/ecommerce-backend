@@ -1,9 +1,8 @@
 const fs = require("fs");
 const https = require("https");
 const axios = require("axios");
-const data = require("./product.json");
-const { elasticURL } = require("./config");
-
+const data = require("./Data/desks.json");
+const { elasticURL, authorizationBasic } = require("./config");
 data.forEach((item, index) => {
   var config = {
     method: "POST",
