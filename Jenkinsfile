@@ -19,7 +19,7 @@ pipeline {
       steps {
         // 'gcloud auth login'
         // "gcloud container clusters get-credentials ${clusterName} --zone ${zone} --project ${gcloudProject}"
-        'kubectl apply -f k8s/deployment.yaml'
+        kubectl apply -f k8s/deployment.yaml
       }
     }
   }
