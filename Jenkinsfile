@@ -1,12 +1,9 @@
 pipeline {
   agent any
   environment {
-    scannerHome = tool 'SonarQubeScanner'
-    username='admin'
     appName='nagp-shivam-backend'
-    sonarAppName='sonar-shivambindal'
-    clusterName='nagp-shivam-backend'
-    gcloudProject='My First Project'
+    clusterName='cluster-1'
+    gcloudProject='long-way-379611'
     zone='us-central1-c'
   }
   tools {
@@ -20,9 +17,9 @@ pipeline {
     }
     stage('Kubernetes Deployment') {
       steps {
-        // bat 'gcloud auth login'
-        // bat "gcloud container clusters get-credentials ${clusterName} --zone ${zone} --project ${gcloudProject}"
-        bat 'kubectl apply -f k8s/deployment.yaml'
+        // 'gcloud auth login'
+        // "gcloud container clusters get-credentials ${clusterName} --zone ${zone} --project ${gcloudProject}"
+        'kubectl apply -f k8s/deployment.yaml'
       }
     }
   }
