@@ -14,6 +14,9 @@ pipeline {
       steps {
         sh 'npm i'
         sh 'docker build -t nagpshivam/ecom-backend:latest .'
+         withCredentials([usernamePassword(credentialsId: 'dockerCred', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+          sh "docker login -u $DOCKER_USER -p $DOCKER_PASS"
+        }
         sh 'docker push nagpshivam/ecom-backend:latest'
       }
     }
