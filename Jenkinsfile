@@ -17,7 +17,7 @@ pipeline {
     }
     stage('Kubernetes Deployment') {
       steps {
-        sh 'gcloud auth login'
+        sh 'gcloud auth login --no-launch-browser'
         sh "gcloud container clusters get-credentials ${clusterName} --zone ${zone} --project ${gcloudProject}"
         sh 'kubectl apply -f k8s/deployment.yaml'
       }
