@@ -12,14 +12,14 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        bat 'npm i'
+        sh 'npm i'
       }
     }
     stage('Kubernetes Deployment') {
       steps {
         // 'gcloud auth login'
         // "gcloud container clusters get-credentials ${clusterName} --zone ${zone} --project ${gcloudProject}"
-        kubectl apply -f k8s/deployment.yaml
+        sh 'kubectl apply -f k8s/deployment.yaml'
       }
     }
   }
