@@ -7,6 +7,8 @@ pipeline {
     zone='us-central1-c'
     dockerPwd=credentials('dockerPwd')
     KUBECONFIG = "/home/shivamchatgpt/.kube/config"
+    CLOUDSDK_CORE_PROJECT='long-way-379611'
+    GCLOUD_CREDS=credentials('gcloud-creds')
   }
   tools {
     nodejs 'nodejs'
@@ -26,7 +28,8 @@ pipeline {
       steps {
         //sh 'gcloud auth login --no-launch-browser'
         //sh "gcloud container clusters get-credentials ${clusterName} --zone ${zone} --project ${gcloudProject}"
-        sh 'kubectl --kubeconfig=${KUBECONFIG} apply -f k8s/deployment.yaml'
+        sh 'gcloud auth activate-service-account --key-file="$GCLOUD_CREDS"'
+        sh 'kubectl apply -f k8s/deployment.yaml'
       }
     }
   }
