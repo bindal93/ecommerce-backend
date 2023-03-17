@@ -17,7 +17,7 @@ pipeline {
       steps {
         sh 'npm i'
         sh 'docker build -t nagpshivam/ecom-backend:latest .'
-        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --p $DOCKERHUB_CREDENTIALS_PSW --password-stdin https://hub.docker.com/'
+        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --p $DOCKERHUB_CREDENTIALS_PSW'
         sh 'docker push nagpshivam/ecom-backend:latest'
       }
     }
