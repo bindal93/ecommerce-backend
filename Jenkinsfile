@@ -6,7 +6,7 @@ pipeline {
     gcloudProject='long-way-379611'
     zone='us-central1-c'
     dockerPwd=credentials('dockerPwd')
-    KUBECONFIG = "/home/shivamchatgpt/.kube"
+    KUBECONFIG = "/home/shivamchatgpt/.kube/config"
   }
   tools {
     nodejs 'nodejs'
