@@ -15,7 +15,7 @@ pipeline {
       steps {
         sh 'npm i'
         sh 'sudo docker build -t nagpshivam/ecom-backend:latest .'
-        sh "sudo docker login -u nagpshivam -p ${dockerPwd}"
+        sh "sudo docker login -u nagpshivam -p ${dockerPwd} -S"
         sh 'sudo docker push nagpshivam/ecom-backend:latest'
       }
     }
