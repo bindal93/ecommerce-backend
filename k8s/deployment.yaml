@@ -6,7 +6,7 @@ metadata:
   labels:
     app: backend-shivam
 data:
-  ELASTIC_URL: "https://34.125.228.46:9200"
+  ELASTIC_URL: "https://34.125.249.203:9200"
 
 ---
 apiVersion: v1
