@@ -26,7 +26,7 @@ pipeline {
       steps {
         //sh 'gcloud auth login --no-launch-browser'
         //sh "gcloud container clusters get-credentials ${clusterName} --zone ${zone} --project ${gcloudProject}"
-        sh 'sudo kubectl --kubeconfig=${KUBECONFIG} apply -f k8s/deployment.yaml'
+        sh 'kubectl --kubeconfig=${KUBECONFIG} apply -f k8s/deployment.yaml'
       }
     }
   }
