@@ -15,11 +15,11 @@ pipeline {
     stage('Build') {
       steps {
         sh 'npm i'
-        sh 'docker build -t nagpshivam/ecom-backend:latest .'
+        // sh 'docker build -t nagpshivam/ecom-backend:latest .'
         // withCredentials([string(credentialsId: 'dockerPwd', variable: 'dockerhubpwd')]) {
         //  sh 'docker login -u nagpshivam -p ${dockerhubpwd}'
         // }
-        //sh 'sudo docker push nagpshivam/ecom-backend:latest'
+        // sh 'sudo docker push nagpshivam/ecom-backend:latest'
       }
     }
     stage('Kubernetes Deployment') {
