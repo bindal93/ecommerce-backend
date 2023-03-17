@@ -15,7 +15,6 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        sh 'npm i'
         sh 'docker build -t nagpshivam/ecom-backend:latest .'
         sh 'docker login -u ${dockerUsr} -p ${dockerPwd}'
         sh 'docker push nagpshivam/ecom-backend:latest'
