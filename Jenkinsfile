@@ -16,9 +16,9 @@ pipeline {
     stage('Build') {
       steps {
         sh 'npm i'
-        sh 'docker build -t nagpshivam/ecom-backend:latest .'
-        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-        sh 'docker push nagpshivam/ecom-backend:latest'
+        sh 'sudo docker build -t nagpshivam/ecom-backend:latest .'
+        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+        sh 'sudo docker push nagpshivam/ecom-backend:latest'
       }
     }
     stage('Kubernetes Deployment') {
