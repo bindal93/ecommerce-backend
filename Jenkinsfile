@@ -15,7 +15,7 @@ pipeline {
     stage('Build') {
       steps {
         sh 'npm i'
-        sh 'sudo docker build -t nagpshivam/ecom-backend:latest .'
+        sh 'docker build -t nagpshivam/ecom-backend:latest .'
         // withCredentials([string(credentialsId: 'dockerPwd', variable: 'dockerhubpwd')]) {
         //  sh 'docker login -u nagpshivam -p ${dockerhubpwd}'
         // }
