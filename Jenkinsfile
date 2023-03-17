@@ -5,6 +5,7 @@ pipeline {
     clusterName='cluster-1'
     gcloudProject='long-way-379611'
     zone='us-central1-c'
+    dockerPwd=credentials('dockerPwd')
   }
   tools {
     nodejs 'nodejs'
@@ -14,7 +15,7 @@ pipeline {
       steps {
         sh 'npm i'
         sh 'sudo docker build -t nagpshivam/ecom-backend:latest .'
-        sh "sudo docker login -u nagpshivam -p 7Feb@1993"
+        sh "sudo docker login -u nagpshivam -p ${dockerPwd}"
         sh 'sudo docker push nagpshivam/ecom-backend:latest'
       }
     }
