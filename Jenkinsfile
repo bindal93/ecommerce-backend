@@ -5,8 +5,7 @@ pipeline {
     clusterName='cluster-1'
     gcloudProject='long-way-379611'
     zone='us-central1-c'
-    dockerPwd=credentials('dockerPwd')
-    KUBECONFIG = "/home/shivamchatgpt/.kube/config"
+    DOCKERHUB_CREDENTIALS=credentials('dockerPwd')
     CLOUDSDK_CORE_PROJECT='long-way-379611'
     GCLOUD_CREDS=credentials('gcloud-creds')
   }
@@ -17,11 +16,9 @@ pipeline {
     stage('Build') {
       steps {
         sh 'npm i'
-        // sh 'docker build -t nagpshivam/ecom-backend:latest .'
-        // withCredentials([string(credentialsId: 'dockerPwd', variable: 'dockerhubpwd')]) {
-        //  sh 'docker login -u nagpshivam -p ${dockerhubpwd}'
-        // }
-        // sh 'sudo docker push nagpshivam/ecom-backend:latest'
+        sh 'docker build -t nagpshivam/ecom-backend:latest .'
+        sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+        sh 'docker push nagpshivam/ecom-backend:latest'
       }
     }
     stage('Kubernetes Deployment') {
