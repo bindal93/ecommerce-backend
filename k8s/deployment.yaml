@@ -44,9 +44,7 @@ spec:
         - name: backend-shivam
           image: nagpshivam/ecom-backend:latest
           ports:
-            - name: http
-              containerPort: 5000
-              protocol: TCP
+            - containerPort: 5000
           envFrom:
           - configMapRef:
               name: backend-configmap-shivam
@@ -65,7 +63,6 @@ spec:
   selector:
     app: backend-shivam
   ports:
-  - targetPort: 5000
-    port: 81
-    protocol: TCP
-    nodePort: 30081
+  - name: http
+    port: 5000
+    targetPort: 5000
