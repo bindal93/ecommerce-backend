@@ -10,18 +10,22 @@ data.forEach((item, index) => {
     url: `${elasticURL}/products/_doc/`,
     headers: {
       "Content-Type": "application/json",
-      Authorization: authorizationBasic
+      Authorization: authorizationBasic,
     },
     data: item,
     httpsAgent: new https.Agent({
       cert: fs.readFileSync("http_ca.crt"),
-      rejectUnauthorized: false
-    })
+      rejectUnauthorized: false,
+    }),
   };
 
   axios(config)
     .then(function (response) {
-      console.log(JSON.stringify(response.data), "################### index ", index);
+      console.log(
+        JSON.stringify(response.data),
+        "################### index ",
+        index
+      );
     })
     .catch(function (error) {
       console.log(error);

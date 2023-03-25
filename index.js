@@ -7,6 +7,8 @@ let port = process.env.PORT || 5000;
 app.use(cors());
 // app.use("/", authorization);
 app.use("/api/v1", cors(), routes);
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`The server is listening on port ${port}`);
 });
+
+module.exports = { app, server };

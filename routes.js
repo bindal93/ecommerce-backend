@@ -9,14 +9,14 @@ const elasticClient = new Client({
   auth: authObj,
   tls: {
     ca: fs.readFileSync("./http_ca.crt"),
-    rejectUnauthorized: false
+    rejectUnauthorized: false,
   },
   headers: {
     "Content-Type": "application/json",
     "access-control-allow-origin": "*",
     accept: "*/*",
-    Authorization: authorizationBasic
-  }
+    Authorization: authorizationBasic,
+  },
 });
 
 router.use((req, res, next) => {
@@ -26,127 +26,122 @@ router.use((req, res, next) => {
       index: "logs",
       body: {
         url: req.url,
-        method: req.method
-      }
+        method: req.method,
+      },
     })
-    .then((res) => {
-      console.log("Logs indexed");
-    })
-    .catch((err) => {
-      console.log("error occured");
-      console.log(err);
-    });
+    .then((res) => {})
+    .catch((err) => {});
   next();
 });
 
 router.post("/products", bodyParser, (req, res) => {
-  console.log("44 #################");
+  console.log("post /products #################");
   elasticClient
     .index({
       index: "products",
-      body: req.body
+      body: req.body,
     })
     .then((resp) => {
       return res.status(200).json({
-        msg: "product indexed"
+        msg: "product indexed",
       });
     })
     .catch((err) => {
       return res.status(500).json({
         msg: "Error",
-        err
+        err,
       });
     });
 });
 
 router.get("/products/:id", (req, res) => {
-  console.log("64 #################");
+  console.log("get /products/:id #################");
   let query = {
     index: "products",
-    id: req.params.id
+    id: req.params.id,
   };
   elasticClient
     .get(query)
     .then((resp) => {
       if (!resp) {
         return res.status(404).json({
-          product: resp
+          product: resp,
         });
       }
       return res.status(200).json({
-        product: resp
+        product: resp,
       });
     })
     .catch((err) => {
       return res.status(500).json({
         msg: "Error not found",
-        err
+        err,
       });
     });
 });
 
 router.put("/products/:id", bodyParser, (req, res) => {
-  console.log("90 #################");
+  console.log("put /products/:id #################");
   elasticClient
     .update({
       index: "products",
       id: req.params.id,
       body: {
-        doc: req.body
-      }
+        doc: req.body,
+      },
     })
     .then((resp) => {
       return res.status(200).json({
-        msg: "product updated"
+        msg: "product updated",
       });
     })
     .catch((err) => {
       console.log(err);
       return res.status(500).json({
         msg: "Error",
-        err
+        err,
       });
     });
 });
 
 router.delete("/products/:id", (req, res) => {
-  console.log("114 #################");
+  console.log("delete /products/:id #################");
   elasticClient
     .delete({
       index: "products",
-      id: req.params.id
+      id: req.params.id,
     })
     .then((resp) => {
       res.status(200).json({
-        msg: "Product deleted"
+        msg: "Product deleted",
       });
     })
     .catch((err) => {
       res.status(404).json({
-        msg: "Error"
+        msg: "Error",
       });
     });
 });
 
 router.get("/products", (req, res) => {
-  console.log("133 #################", req.query);
+  console.log("get /products #################", req.query);
   let query = {
     index: "products",
-    size: 200
+    size: 200,
   };
   if (req.query.product) query.q = `*${req.query.product}*`;
   elasticClient
     .search(query)
     .then((resp) => {
       return res.status(200).json({
-        products: resp.hits.hits
+        products: resp.hits.hits,
       });
     })
     .catch((err) => {
       console.log(err);
       return res.status(500).json({
         msg: "Error",
-        err
+        err,
       });
     });
 });

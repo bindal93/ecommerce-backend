@@ -22,7 +22,7 @@ spec:
           ports:
             - containerPort: 5000
           envFrom:
-          - configMapRef:
-              name: backend-configmap-shivam
-          - secretRef:
-              name: backend-secret-shivam
+            - configMapRef:
+                name: backend-configmap-shivam
+            - secretRef:
+                name: backend-secret-shivam
