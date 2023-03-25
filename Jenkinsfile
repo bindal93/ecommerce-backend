@@ -31,11 +31,4 @@ pipeline {
       }
     }
   }
-  post {
-    always {
-      script {
-        sh "rm -rf ${workspace}"
-      }
-    }
-  }
 }
