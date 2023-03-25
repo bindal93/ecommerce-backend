@@ -13,6 +13,16 @@ pipeline {
     nodejs 'nodejs'
   }
   stages {
+    stage('Install') {
+      steps {
+        sh 'npm install'
+      }
+    }
+    stage('Test') {
+      steps {
+        sh 'npm run test'
+      }
+    }
     stage('Build') {
       steps {
         sh 'docker build -t nagpshivam/ecom-backend:latest .'
@@ -24,7 +34,7 @@ pipeline {
       steps {
         sh 'gcloud auth activate-service-account --key-file="$GCLOUD_CREDS"'
         sh "gcloud container clusters get-credentials ${clusterName} --zone ${zone} --project ${gcloudProject}"
-        // sh 'kubectl delete -f k8s/deployment.yaml'
+        sh 'kubectl delete -f k8s/deployment.yaml'
         sh 'kubectl apply -f k8s/configMap.yaml --force --grace-period=0'
         sh 'kubectl apply -f k8s/deployment.yaml --force --grace-period=0'
         sh 'kubectl apply -f k8s/service.yaml --force --grace-period=0'
