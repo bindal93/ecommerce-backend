@@ -18,6 +18,7 @@ spec:
       containers:
         - name: backend-shivam
           image: nagpshivam/ecom-backend:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 5000
           envFrom:
