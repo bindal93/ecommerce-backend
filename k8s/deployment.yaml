@@ -21,6 +21,9 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 5000
+          env:
+            - name: CORS_ALLOW_ORIGIN
+              value: "*"
           envFrom:
             - configMapRef:
                 name: backend-configmap-shivam
