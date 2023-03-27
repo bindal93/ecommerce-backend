@@ -18,11 +18,11 @@ pipeline {
         sh 'npm install'
       }
     }
-    stage('Test') {
-      steps {
-      //  sh 'npm run test'
-      }
-    }
+    // stage('Test') {
+    //   steps {
+    //   //  sh 'npm run test'
+    //   }
+    // }
     stage('Build') {
       steps {
         sh 'docker build -t nagpshivam/ecom-backend:latest .'
