@@ -8,6 +8,6 @@ spec:
   selector:
     app: backend-shivam
   ports:
-    - name: http
+    - protocol: TCP
       port: 5000
       targetPort: 5000

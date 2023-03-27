@@ -1,0 +1,26 @@
+# apiVersion: "networking.k8s.io/v1"
+# kind: "Ingress"
+# metadata:
+#   name: "backend-shivam-ingress"
+#   namespace: "kubernetes-cluster-shivam"
+# spec:
+#   defaultBackend:
+#     service:
+#       name: "backend-shivam"
+#       port:
+#         number: 5000
+#   tls:
+#   - secretName: "tls-secret"
+# status:
+#   loadBalancer: {}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: "backend-shivam-ingress"
+  namespace: "kubernetes-cluster-shivam"
+spec:
+  defaultBackend:
+    service:
+      name: "backend-shivam"
+      port:
+        number: 5000

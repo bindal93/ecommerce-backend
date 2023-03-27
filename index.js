@@ -12,6 +12,9 @@ app.use(cors());
 //   })
 // );
 // app.use("/", authorization);
+app.use("/", (request, response, next) => {
+  return response.status(200).send({ message: "response generated" });
+});
 app.use("/api/v1", cors(), routes);
 const server = app.listen(port, () => {
   console.log(`The server is listening on port ${port}`);
