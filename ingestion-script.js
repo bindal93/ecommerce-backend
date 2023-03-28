@@ -1,7 +1,7 @@
 const fs = require("fs");
 const https = require("https");
 const axios = require("axios");
-const data = require("./Data/desks.json");
+const data = require("./Data/products.json");
 const { elasticURL, authorizationBasic } = require("./config");
 data.forEach((item, index) => {
   var config = {
