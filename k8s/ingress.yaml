@@ -5,7 +5,7 @@ metadata:
   namespace: "kubernetes-cluster-shivam"
 spec:
   tls:
-  - secretName: tls-secret
+    - secretName: tls-secret
   defaultBackend:
     service:
       name: "backend-shivam"
