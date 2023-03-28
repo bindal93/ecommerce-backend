@@ -18,11 +18,11 @@ pipeline {
         sh 'npm install'
       }
     }
-    // stage('Test') {
-    //   steps {
-    //   //  sh 'npm run test'
-    //   }
-    // }
+    stage('Test') {
+      steps {
+        sh 'npm run test'
+      }
+    }
     stage('Build') {
       steps {
         sh 'docker build -t nagpshivam/ecom-backend:latest .'
@@ -38,6 +38,7 @@ pipeline {
         sh 'kubectl apply -f k8s/configMap.yaml --force --grace-period=0'
         sh 'kubectl apply -f k8s/deployment.yaml --force --grace-period=0'
         sh 'kubectl apply -f k8s/service.yaml --force --grace-period=0'
+        sh 'kubectl apply -f k8s/ingress.yaml --force --grace-period=0'
       }
     }
   }
