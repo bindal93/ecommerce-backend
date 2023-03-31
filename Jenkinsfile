@@ -36,7 +36,7 @@ pipeline {
         sh "gcloud container clusters get-credentials ${clusterName} --zone ${zone} --project ${gcloudProject}"
         sh 'kubectl delete -f k8s/deployment.yaml'
         sh 'kubectl apply -f k8s/configMap.yaml --force --grace-period=0'
-        sh 'kubectl apply -f k8s/deployment.yaml --force --grace-period=0'
+        sh 'kubectl apply -f k8s/deployment.yaml --force --overwrite --grace-period=0'
         sh 'kubectl apply -f k8s/service.yaml --force --grace-period=0'
         sh 'kubectl apply -f k8s/ingress.yaml --force --grace-period=0'
       }
