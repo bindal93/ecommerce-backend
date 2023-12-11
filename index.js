@@ -13,6 +13,11 @@ const server = app.listen(port, () => {
 app.use((request, response, next) => {
   if (request.path === "/") {
     response.status(200).send({ message: "response generated" });
+  } else if (request.path === "/shivam") {
+    // response.status(200).send({ message: "response generated" });
+    response.redirect(301, "/redirect");
+  } else if (request.path === "/redirect") {
+    response.status(200).send("<script>alert('hi')</script>");
   } else {
     next();
   }
